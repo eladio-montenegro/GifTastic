@@ -42,7 +42,31 @@ function displayInfo() {
         url: queryURL,
         method: "GET"
     }) .then(function(response) {
+        //making sure the api pulls the gifs
         console.log(response);
+
+        var results = response.data;
+
+        for (var i=0; i<results.length; i++){
+
+            var dataImage = $("<img>");
+            dataImage.attr("src", results[i].images.fixed_height_still.url);
+            dataImage.attr("data-still", results[i].images.fixed_height_still.url);
+            dataImage.attr("data-animate", results[i].images.fixed_height.url);
+            dataImage.addClass("gif");
+            dataImage.attr("data-state", "still");
+
+
+            var newItemdiv = $('<div class="newItem">');
+            var gifRating = results[i].rating;
+            var divRating = $("<p>").text("Rating: " + gifRating);
+            
+            newItemdiv.append(divRating);
+            newItemdiv.append(dataImage);
+
+            $("#mainimages").prepend(newItemdiv);
+
+        }
     
     });
 }
