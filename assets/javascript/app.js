@@ -11,7 +11,7 @@ $(document).ready(function() {
 
             var newButton = $("<button>");
             newButton.addClass("itembutton");
-            newButton.addClass("btn btn-success");
+            newButton.addClass("btn btn-info");
             newButton.text(states[i]);
             newButton.attr("data-name", states[i]);
             $("#allbuttons").append(newButton);
@@ -70,4 +70,19 @@ function displayInfo() {
     
     });
 }
+
+$("#mainimages").on("click", ".gif", function() {
+    var state = $(this).attr("data-state");
+    if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animate");
+    }
+
+
+    else if (state === "animate") {
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
+    }
+
+});
 });
